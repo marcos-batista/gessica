@@ -1,0 +1,74 @@
+<html ng-app="GessicaVendasApp">
+	
+	<head>
+		<meta charset="UTF-8">
+		
+		<!-- bootstrap imports -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		
+		<!-- angularjs imports -->
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+		
+		<!-- gessica imports -->
+		<script src="gessica-vendas-app.js"></script>
+		<script src="controllers/cliente-controller.js"></script>
+		
+		<!-- gessica data -->
+		<title>Gessica - Vendas</title>
+		<style type="text/css">
+		
+			.jumbotron {
+				text-align : center;
+				margin-top : 5px;
+				margin-left : auto;
+				margin-right : auto;
+			}
+			
+			.table {
+				margin-top : 45px;
+			}
+			
+			.btn-primary {
+				margin-top : 10px;
+			}
+			
+		</style>
+		
+	</head>
+	
+	<body>
+		<!-- lista de clientes -->
+		<div ng-controller="ClienteController" class="jumbotron">
+			<h2>Clientes</h2>
+			
+			<div class="form-group">
+				<input type="text" placeholder="Razão Social" ng-model="cliente.razaoSocial" class="form-control">
+				<input type="text" placeholder="Nome Fantasia" ng-model="cliente.nomeFantasia" class="form-control"/>
+				<select ng-model="cliente.categoria" class="form-control">
+					<option>COMUM</option>
+					<option>ESPECIAL</option>
+				</select>
+				<button ng-click="ClienteController.saveCliente()" class="btn-primary btn-block">Adicionar Cliente</button>
+			</div>
+			
+			<table class="table table-striped">
+				<tr>
+					<th>Identificador</th>
+					<th>Razão Social</th>
+					<th>Nome Fantasia</th>
+					<th>Categoria</th>
+				</tr>
+				<tr ng-repeat="c in clientes">
+					<td>{{c.id}}</td>
+					<td>{{c.razaoSocial}}</td>
+					<td>{{c.nomeFantasia}}</td>
+					<td>{{c.categoria}}</td>
+				</tr>
+			</table>
+		</div>
+		
+	</body>
+	
+</html>

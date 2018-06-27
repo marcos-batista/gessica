@@ -1,13 +1,13 @@
-package com.agroall.gessica.ebs;
+package com.agroall.gessica.esb;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 
-public class EbsManagerServletInitializer extends SpringBootServletInitializer {
+public class ESBManagerServletInitializer extends SpringBootServletInitializer {
 	
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-		return builder.sources(EbsManager.class);
+		return builder.sources(ESBManager.class);
 	}
 	
 }

@@ -3,10 +3,10 @@
 	
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>marcosbatista.courses.pucminasvirtual.archsoftware.tcc</groupId>
-	<artifactId>gessica-ebs</artifactId>
+	<artifactId>gessica</artifactId>
 	<version>4.1.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
-	<name>gessica-ebs</name>
+	<name>gessica</name>
 	<description>Barramento de Integrações do Gessica</description>
 
 	<parent>
@@ -46,6 +46,19 @@
 			<version>4.1.0-SNAPSHOT</version>
 		</dependency>
 		
+		<dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20180130</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-web-api</artifactId>
+            <version>8.0</version>
+            <type>jar</type>
+        </dependency>
+        
 	</dependencies>
 
 	<build>

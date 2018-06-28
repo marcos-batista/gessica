@@ -4,91 +4,91 @@ import java.util.Collection;
 
 import org.springframework.stereotype.Service;
 
+import com.agroall.gessica.dataobjects.Produto;
 import com.agroall.gessica.esb.application.Addresses;
-import com.agroall.gessica.esb.application.vendas.dataobjects.Cliente;
 import com.agroall.gessica.esb.connectors.rest.RestTemplate;
 import com.agroall.gessica.esb.connectors.rest.RestTemplateSpring;
 import com.agroall.gessica.esb.connectors.rest.RestTemplateSpringImpl;
 
 @Service
-public class ClienteService {
+public class ProdutoService {
 	
-	public Collection<Cliente> listClientes(){
+	public Collection<Produto> listProdutos(){
 		throw new RuntimeException("NOT IMPLEMENTED YET");
 	}
 	
-	public Cliente getNewCliente() {
+	public Produto getNewProduto() {
 		RestTemplate restTemplate = new RestTemplateSpringImpl();
 		restTemplate
 			.get()
-			.resource("/cliente")
+			.resource("/produto")
 			.inHost(Addresses.MODULE_VENDAS)
 			.addingRequestProperty("Accept", "application/json")
 		;
-		((RestTemplateSpring) restTemplate).setResponseType(Cliente.class);
-		Object cliente = restTemplate.consumes();
-		return (Cliente) cliente;
+		((RestTemplateSpring) restTemplate).setResponseType(Produto.class);
+		Object produto = restTemplate.consumes();
+		return (Produto) produto;
 	}
 	
-	public Cliente getCliente(String idCliente) {
+	public Produto getProduto(String idProduto) {
 		RestTemplate restTemplate = new RestTemplateSpringImpl();
 		restTemplate
 			.get()
-			.resource("/cliente/".concat(idCliente))
+			.resource("/produto/".concat(idProduto))
 			.inHost(Addresses.MODULE_VENDAS)
 			.addingRequestProperty("Accept", "application/json")
 		;
-		((RestTemplateSpring) restTemplate).setResponseType(Cliente.class);
-		Object cliente = restTemplate.consumes();
-		return (Cliente) cliente;
+		((RestTemplateSpring) restTemplate).setResponseType(Produto.class);
+		Object produto = restTemplate.consumes();
+		return (Produto) produto;
 	}
 	
-	public Cliente saveNewCliente(Cliente cliente) {
+	public Produto saveNewProduto(Produto produto) {
 		RestTemplate restTemplate = new RestTemplateSpringImpl();
 		
 		//TODO: descobrir como setar o payload no RestTemplate
 		restTemplate
 			.post()
-			.resource("/cliente")
+			.resource("/produto")
 			.inHost(Addresses.MODULE_VENDAS)
 			.addingRequestProperty("Accept", "application/json")
 		;
 		
-		((RestTemplateSpring) restTemplate).setResponseType(Cliente.class);
-		cliente = (Cliente) restTemplate.consumes();
-		return cliente;
+		((RestTemplateSpring) restTemplate).setResponseType(Produto.class);
+		produto = (Produto) restTemplate.consumes();
+		return produto;
 		
 	}
 	
-	public Cliente updateCliente(Cliente cliente) {
+	public Produto updateProduto(Produto produto) {
 		RestTemplate restTemplate = new RestTemplateSpringImpl();
 		
 		//TODO: descobrir como setar o payload no RestTemplate
 		restTemplate
 			.put()
-			.resource("/cliente")
+			.resource("/produto")
 			.inHost(Addresses.MODULE_VENDAS)
 			.addingRequestProperty("Accept", "application/json")
 		;
 		
-		((RestTemplateSpring) restTemplate).setResponseType(Cliente.class);
-		cliente = (Cliente) restTemplate.consumes();
-		return cliente;
+		((RestTemplateSpring) restTemplate).setResponseType(Produto.class);
+		produto = (Produto) restTemplate.consumes();
+		return produto;
 	}
 	
-	public Cliente deleteCliente(String idCliente) {
+	public Produto deleteProduto(String idProduto) {
 		RestTemplate restTemplate = new RestTemplateSpringImpl();
 		
 		restTemplate
 			.delete()
-			.resource("/cliente/".concat(idCliente))
+			.resource("/produto/".concat(idProduto))
 			.inHost(Addresses.MODULE_VENDAS)
 			.addingRequestProperty("Accept", "application/json")
 		;
 		
-		((RestTemplateSpring) restTemplate).setResponseType(Cliente.class);
-		Object cliente = (Cliente) restTemplate.consumes();
-		return (Cliente) cliente;
+		((RestTemplateSpring) restTemplate).setResponseType(Produto.class);
+		Object produto = (Produto) restTemplate.consumes();
+		return (Produto) produto;
 	}
 	
 }

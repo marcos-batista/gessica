@@ -5,12 +5,15 @@ import java.util.Map;
 
 import org.springframework.http.HttpMethod;
 
-public abstract class RestTemplateImpl implements RestTemplateSingleHttp {
+public abstract class RestTemplateImpl implements RestTemplate {
 	
 	private String host;
 	private String resourcePath;
 	private HttpMethod method;
 	private Map<String, String> requestProperties;
+	private Map<String, String> urlParameters;
+	private Map<String, String> queryParameters;
+	private Object bodyObject;
 	
 	protected String getHost() {
 		return host;
@@ -27,6 +30,20 @@ public abstract class RestTemplateImpl implements RestTemplateSingleHttp {
 	protected Map<String, String> getRequestProperties() {
 		if(this.requestProperties == null) { this.requestProperties = factoryMapRequestProperties(); }
 		return requestProperties;
+	}
+	
+	protected Map<String, String> getUrlParameters() {
+		if(this.urlParameters == null) { this.urlParameters = factoryMapRequestProperties(); }
+		return urlParameters;
+	}
+	
+	protected Map<String, String> getQueryParameters() {
+		if(this.queryParameters == null) { this.queryParameters = factoryMapRequestProperties(); }
+		return queryParameters;
+	}
+	
+	protected Object getBodyObject() {
+		return bodyObject;
 	}
 	
 	@Override
@@ -74,6 +91,33 @@ public abstract class RestTemplateImpl implements RestTemplateSingleHttp {
 	
 	protected Map<String, String> factoryMapRequestProperties() {
 		return new HashMap<String, String>();
+	}
+	
+	@Override
+	public RestTemplate addingUrlParameter(String parameterName, String parameterValue) {
+		if(this.urlParameters == null) { this.urlParameters = factoryMapUrlParameters(); }
+		this.urlParameters.put(parameterName, parameterValue);
+		return this;
+	}
+	
+	protected Map<String, String> factoryMapUrlParameters() {
+		return new HashMap<String, String>();
+	}
+	
+	@Override
+	public RestTemplate addingQueryParameter(String parameterName, String parameterValue) {
+		if(this.queryParameters == null) { this.queryParameters = factoryMapQueryParameters(); }
+		this.queryParameters.put(parameterName, parameterValue);
+		return this;
+	}
+	
+	protected Map<String, String> factoryMapQueryParameters() {
+		return new HashMap<String, String>();
+	}
+	
+	public RestTemplate settingBodyObject(Object bodyObject) {
+		this.bodyObject = bodyObject;
+		return this;
 	}
 	
 }

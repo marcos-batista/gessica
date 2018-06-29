@@ -46,7 +46,7 @@ public class RestTemplateSingleHttpImpl extends RestTemplateImpl implements Rest
 			throw new RuntimeException(e);
 		}
 	}
-
+	
 	@Override
 	public Object consumes() {
 		try

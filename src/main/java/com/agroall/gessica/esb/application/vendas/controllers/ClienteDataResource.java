@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.agroall.gessica.dataobjects.Cliente;
+import com.agroall.gessica.esb.application.vendas.dataobjects.Cliente;
 import com.agroall.gessica.esb.application.vendas.services.ClienteService;
 
 @RestController
@@ -26,22 +26,28 @@ public class ClienteDataResource {
 	
 	@RequestMapping(method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
 	public Cliente doPost(@RequestBody Cliente cliente) {
-		throw new RuntimeException("NOT IMPLEMENTED YET");
+		Cliente savedCliente = this.service.saveNewCliente(cliente);
+		return savedCliente;
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public Cliente doGet(@PathVariable(value = "id") String id) {
-		throw new RuntimeException("NOT IMPLEMENTED YET");
+		Cliente foundCliente = this.service.getCliente(id);
+		return foundCliente;
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
 	public Cliente doPut(@PathVariable(value = "id") String id, @RequestBody Cliente cliente) {
-		throw new RuntimeException("NOT IMPLEMENTED YET");
+		cliente.setId(id);
+		Cliente updatedCliente = this.service.updateCliente(cliente);
+		return updatedCliente;
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, consumes = "application/json", produces = "application/json")
 	public Cliente doDelete(Cliente cliente) {
-		throw new RuntimeException("NOT IMPLEMENTED YET");
+		String idCliente = cliente.getId();
+		Cliente newCliente = this.service.deleteCliente(idCliente);
+		return newCliente;
 	}
 	
 }

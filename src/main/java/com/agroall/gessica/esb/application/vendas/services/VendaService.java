@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import com.agroall.gessica.esb.application.Addresses;
 import com.agroall.gessica.esb.application.vendas.dataobjects.Venda;
-import com.agroall.gessica.esb.application.vendas.dataobjects.Venda;
 import com.agroall.gessica.esb.connectors.rest.RestTemplate;
 import com.agroall.gessica.esb.connectors.rest.RestTemplateSpring;
 import com.agroall.gessica.esb.connectors.rest.RestTemplateSpringImpl;

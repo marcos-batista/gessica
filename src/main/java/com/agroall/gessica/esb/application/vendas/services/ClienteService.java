@@ -46,12 +46,12 @@ public class ClienteService {
 	public Cliente saveNewCliente(Cliente cliente) {
 		RestTemplate restTemplate = new RestTemplateSpringImpl();
 		
-		//TODO: descobrir como setar o payload no RestTemplate
 		restTemplate
 			.post()
 			.resource("/cliente")
 			.inHost(Addresses.MODULE_VENDAS)
 			.addingRequestProperty("Accept", "application/json")
+			.settingBodyObject(cliente)
 		;
 		
 		((RestTemplateSpring) restTemplate).setResponseType(Cliente.class);
@@ -63,17 +63,19 @@ public class ClienteService {
 	public Cliente updateCliente(Cliente cliente) {
 		RestTemplate restTemplate = new RestTemplateSpringImpl();
 		
-		//TODO: descobrir como setar o payload no RestTemplate
+		String idCliente = cliente.getId();
 		restTemplate
 			.put()
-			.resource("/cliente")
+			.resource("/cliente/".concat(idCliente))
 			.inHost(Addresses.MODULE_VENDAS)
 			.addingRequestProperty("Accept", "application/json")
+			.settingBodyObject(cliente)
 		;
 		
 		((RestTemplateSpring) restTemplate).setResponseType(Cliente.class);
-		cliente = (Cliente) restTemplate.consumes();
-		return cliente;
+		restTemplate.consumes();
+		
+		return getCliente(idCliente);
 	}
 	
 	public Cliente deleteCliente(String idCliente) {
@@ -84,11 +86,14 @@ public class ClienteService {
 			.resource("/cliente/".concat(idCliente))
 			.inHost(Addresses.MODULE_VENDAS)
 			.addingRequestProperty("Accept", "application/json")
+			.addingUrlParameter("id", idCliente)
+			.settingBodyObject(new Cliente())
 		;
 		
 		((RestTemplateSpring) restTemplate).setResponseType(Cliente.class);
-		Object cliente = (Cliente) restTemplate.consumes();
-		return (Cliente) cliente;
+		restTemplate.consumes();
+		
+		return getNewCliente();
 	}
 	
 }

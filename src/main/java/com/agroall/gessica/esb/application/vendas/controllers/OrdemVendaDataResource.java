@@ -20,7 +20,8 @@ public class OrdemVendaDataResource {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public Venda doGet() {
-		throw new RuntimeException("NOT IMPLEMENTED YET");
+		com.agroall.gessica.esb.application.vendas.dataobjects.Venda newVenda = this.service.getNewVenda();
+		return newVenda;
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, consumes = "application/json", produces = "application/json")

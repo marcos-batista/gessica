@@ -79,20 +79,16 @@ public class ClienteService {
 	}
 	
 	public Cliente deleteCliente(String idCliente) {
-		RestTemplate restTemplate = new RestTemplateSpringImpl();
-		
-		restTemplate
-			.delete()
-			.resource("/cliente/".concat(idCliente))
-			.inHost(Addresses.MODULE_VENDAS)
-			.addingRequestProperty("Accept", "application/json")
-			.addingUrlParameter("id", idCliente)
-			.settingBodyObject(new Cliente())
-		;
-		
-		((RestTemplateSpring) restTemplate).setResponseType(Cliente.class);
-		restTemplate.consumes();
-		
+//		RestTemplate restTemplate = new RestTemplateSpringImpl();
+//		restTemplate
+//			.delete()
+//			.resource("/cliente/".concat(idCliente))
+//			.inHost(Addresses.MODULE_VENDAS)
+//			.addingRequestProperty("Accept", "application/json")
+//			.addingRequestProperty("Content-Type", "application/json")
+//			.addingUrlParameter("id", idCliente)
+//		;
+//		restTemplate.consumes();
 		return getNewCliente();
 	}
 	

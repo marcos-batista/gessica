@@ -1,11 +1,5 @@
 package com.agroall.gessica.esb.connectors.rest;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.Map;
-
-import org.springframework.web.client.RestClientException;
-
 public class RestTemplateSpringImpl extends RestTemplateImpl implements RestTemplateSpring {
 	
 	private Class<?> responseType;
@@ -102,14 +96,7 @@ public class RestTemplateSpringImpl extends RestTemplateImpl implements RestTemp
 //		Map<String, String> urlParameters = getUrlParameters();
 		String endpoint = getHost().concat(getResourcePath());
 //		restTemplate.delete(endpoint, urlParameters);
-		try
-		{
-			restTemplate.delete(new URI(endpoint));
-		}
-		catch(RestClientException | URISyntaxException e)
-		{
-			throw new RuntimeException(e);
-		}
+		restTemplate.delete(endpoint);
 		return object;
 	}
 	

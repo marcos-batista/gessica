@@ -46,12 +46,12 @@ public class VendaService {
 	public Venda saveNewVenda(Venda venda) {
 		RestTemplate restTemplate = new RestTemplateSpringImpl();
 		
-		//TODO: descobrir como setar o payload no RestTemplate
 		restTemplate
 			.post()
 			.resource("/venda")
 			.inHost(Addresses.MODULE_VENDAS)
 			.addingRequestProperty("Accept", "application/json")
+			.settingBodyObject(venda)
 		;
 		
 		((RestTemplateSpring) restTemplate).setResponseType(Venda.class);
@@ -63,32 +63,33 @@ public class VendaService {
 	public Venda updateVenda(Venda venda) {
 		RestTemplate restTemplate = new RestTemplateSpringImpl();
 		
-		//TODO: descobrir como setar o payload no RestTemplate
+		String idVenda = venda.getId();
 		restTemplate
 			.put()
-			.resource("/venda")
-			.inHost(Addresses.MODULE_VENDAS)
-			.addingRequestProperty("Accept", "application/json")
-		;
-		
-		((RestTemplateSpring) restTemplate).setResponseType(Venda.class);
-		venda = (Venda) restTemplate.consumes();
-		return venda;
-	}
-	
-	public Venda deleteVenda(String idVenda) {
-		RestTemplate restTemplate = new RestTemplateSpringImpl();
-		
-		restTemplate
-			.delete()
 			.resource("/venda/".concat(idVenda))
 			.inHost(Addresses.MODULE_VENDAS)
 			.addingRequestProperty("Accept", "application/json")
+			.settingBodyObject(venda)
 		;
 		
 		((RestTemplateSpring) restTemplate).setResponseType(Venda.class);
-		Object venda = (Venda) restTemplate.consumes();
-		return (Venda) venda;
+		restTemplate.consumes();
+		
+		return getVenda(idVenda);
+	}
+	
+	public Venda deleteVenda(String idVenda) {
+//		RestTemplate restTemplate = new RestTemplateSpringImpl();
+//		restTemplate
+//			.delete()
+//			.resource("/venda/".concat(idVenda))
+//			.inHost(Addresses.MODULE_VENDAS)
+//			.addingRequestProperty("Accept", "application/json")
+//			.addingRequestProperty("Content-Type", "application/json")
+//			.addingUrlParameter("id", idVenda)
+//		;
+//		restTemplate.consumes();
+		return getNewVenda();
 	}
 	
 }

@@ -11,7 +11,7 @@ import com.agroall.gessica.esb.connectors.rest.RestTemplateSpring;
 import com.agroall.gessica.esb.connectors.rest.RestTemplateSpringImpl;
 
 @Service
-public class ProdutoService {
+public class ProdutoComercialService {
 	
 	public Collection<ProdutoComercial> listProdutos(){
 		throw new RuntimeException("NOT IMPLEMENTED YET");
@@ -45,7 +45,6 @@ public class ProdutoService {
 	
 	public ProdutoComercial saveNewProduto(ProdutoComercial produto) {
 		RestTemplate restTemplate = new RestTemplateSpringImpl();
-		
 		restTemplate
 			.post()
 			.resource("/produto")
@@ -53,11 +52,9 @@ public class ProdutoService {
 			.addingRequestProperty("Accept", "application/json")
 			.settingBodyObject(produto)
 		;
-		
 		((RestTemplateSpring) restTemplate).setResponseType(ProdutoComercial.class);
 		produto = (ProdutoComercial) restTemplate.consumes();
 		return produto;
-		
 	}
 	
 	public ProdutoComercial updateProduto(ProdutoComercial produto) {

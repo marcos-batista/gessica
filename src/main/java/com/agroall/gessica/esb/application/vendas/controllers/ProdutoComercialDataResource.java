@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.agroall.gessica.dataobjects.Produto;
-import com.agroall.gessica.esb.application.vendas.services.ProdutoService;
+import com.agroall.gessica.esb.application.vendas.services.ProdutoComercialService;
 
 @RestController
 @CrossOrigin
 @RequestMapping("/produto")
-public class ProdutoDataResource {
+public class ProdutoComercialDataResource {
 
-	@Autowired private ProdutoService service;
+	@Autowired private ProdutoComercialService service;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public Produto doGet() {
@@ -41,15 +41,6 @@ public class ProdutoDataResource {
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, consumes = "application/json", produces = "application/json")
 	public Produto doDelete(Produto produto) {
-		throw new RuntimeException("NOT IMPLEMENTED YET");
-	}
-	
-	//TODO usar este metodo para dar baixa no estoque
-	@RequestMapping(value = "/{id}/estoque/debito/{quantidade}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
-	public Produto doDebitarEstoque(@PathVariable(value = "id") String id, @PathVariable(value = "quantidade") String quantidade, @RequestBody Produto produto) {
-//		produtoInsumo.setId(id);
-//		debitarEstoque(produtoInsumo, quantidade);
-//		return super.doGet(produtoInsumo.getId());
 		throw new RuntimeException("NOT IMPLEMENTED YET");
 	}
 	

@@ -5,9 +5,7 @@ import com.agroall.gessica.dataobjects.aspects.Persistent;
 public class ProdutoInsumo extends com.agroall.gessica.dataobjects.ProdutoInsumo implements Persistent<String> {
 	
 	private String id;
-	private Double precoCalculado;
-	private Long dataValidade;
-	private boolean agrotoxico;
+	private Double custoUnitario;
 	private ProdutoEstoque estoque;
 	
 	public String getId() {
@@ -18,28 +16,12 @@ public class ProdutoInsumo extends com.agroall.gessica.dataobjects.ProdutoInsumo
 		this.id = id;
 	}
 	
-	public Double getPrecoCalculado() {
-		return this.precoCalculado;
+	public Double getCustoUnitario() {
+		return custoUnitario;
 	}
 	
-	public void setPrecoCalculado(Double precoCalculado) {
-		this.precoCalculado = precoCalculado;
-	}
-	
-	public Long getDataValidade() {
-		return dataValidade;
-	}
-	
-	public void setDataValidade(Long dataValidade) {
-		this.dataValidade = dataValidade;
-	}
-	
-	public boolean isAgrotoxico() {
-		return agrotoxico;
-	}
-	
-	public void setAgrotoxico(boolean agrotoxico) {
-		this.agrotoxico = agrotoxico;
+	public void setCustoUnitario(Double custoUnitario) {
+		this.custoUnitario = custoUnitario;
 	}
 	
 	public ProdutoEstoque getEstoque() {

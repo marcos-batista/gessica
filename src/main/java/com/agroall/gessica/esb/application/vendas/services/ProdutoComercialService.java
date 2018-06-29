@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.agroall.gessica.esb.application.Addresses;
 import com.agroall.gessica.esb.application.vendas.dataobjects.ProdutoComercial;
+import com.agroall.gessica.esb.application.vendas.dataobjects.ProdutoInsumo;
 import com.agroall.gessica.esb.connectors.rest.RestTemplate;
 import com.agroall.gessica.esb.connectors.rest.RestTemplateSpring;
 import com.agroall.gessica.esb.connectors.rest.RestTemplateSpringImpl;
@@ -44,6 +45,7 @@ public class ProdutoComercialService {
 	}
 	
 	public ProdutoComercial saveNewProduto(ProdutoComercial produto) {
+		validateProdutoComercial(produto);
 		RestTemplate restTemplate = new RestTemplateSpringImpl();
 		restTemplate
 			.post()
@@ -55,6 +57,31 @@ public class ProdutoComercialService {
 		((RestTemplateSpring) restTemplate).setResponseType(ProdutoComercial.class);
 		produto = (ProdutoComercial) restTemplate.consumes();
 		return produto;
+	}
+	
+	private void validateProdutoComercial(ProdutoComercial produtoComercial) {
+		RestTemplate restTemplate = new RestTemplateSpringImpl();
+		
+		String idProdutoInsumo = produtoComercial.getCodigo();
+		if(idProdutoInsumo == null || idProdutoInsumo.trim().isEmpty()) {
+			throw new RuntimeException("Código do produto não foi informado!");
+		}
+		
+		restTemplate
+			.get()
+			.resource("/produto/".concat(idProdutoInsumo))
+			.inHost(Addresses.MODULE_ESTOQUE)
+			.addingRequestProperty("Accept", "application/json")
+		;
+		((RestTemplateSpring) restTemplate).setResponseType(ProdutoInsumo.class);
+		ProdutoInsumo produtoInsumo = (ProdutoInsumo) restTemplate.consumes();
+		
+		if(produtoInsumo == null) {
+			throw new RuntimeException("Não há produto no estoque cadastrado com o id '" + idProdutoInsumo + "'");
+		}
+		
+		produtoComercial.setDescricao(produtoInsumo.getDescricao());
+		produtoComercial.setPrecoUnitario(produtoInsumo.getCustoUnitario());
 	}
 	
 	public ProdutoComercial updateProduto(ProdutoComercial produto) {

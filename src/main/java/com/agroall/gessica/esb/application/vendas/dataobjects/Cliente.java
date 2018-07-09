@@ -12,14 +12,14 @@ public class Cliente extends com.agroall.gessica.dataobjects.Cliente {
 		this.id = id;
 	}
 	
-	private int idade;
-	
-	public int getIdade() {
-		return idade;
-	}
-	
-	public void setIdade(int idade) {
-		this.idade = idade;
-	}
+//	private int idade;
+//	
+//	public int getIdade() {
+//		return idade;
+//	}
+//	
+//	public void setIdade(int idade) {
+//		this.idade = idade;
+//	}
 	
 }
